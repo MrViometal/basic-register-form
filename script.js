@@ -18,7 +18,7 @@ let formIsValid = {
   username: false,
   email: false,
   password: false,
-  confirmPassword: true,
+  confirmPassword: false,
 };
 
 // *********************************************************************
@@ -46,6 +46,7 @@ username.addEventListener('focusout', checkUsername);
 email.addEventListener('focusout', checkEmail);
 password.addEventListener('focusout', checkPassword);
 confirmPassword.addEventListener('focusout', checkConfirmPassword);
+
 //to handle input change
 form.addEventListener('keyup', () => (submit.disabled = !isFormValid()));
 
@@ -138,14 +139,18 @@ function checkConfirmPassword() {
   //confirm password is empty => error
   if (confirmPasswordValue === '') {
     setError(confirmPassword, `Password confirmation can not be empty`);
+    formIsValid.confirmPassword = false;
   }
   //confirm password != password => error
   else if (passwordValue !== confirmPasswordValue) {
     setError(confirmPassword, `Password confirmation and password don't match`);
+    formIsValid.confirmPassword = false;
   }
   //confirm password is not empty, and matches password => success
   else {
     setSuccess(confirmPassword);
+    formIsValid.confirmPassword = true;
+
     return true;
   }
 }
