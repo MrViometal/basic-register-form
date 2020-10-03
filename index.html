@@ -21,7 +21,7 @@
     <div id="main-container" class="container">
       <!-- Loader -->
       <div class="loader" id="loader">
-        <div class="spinner" id="spinner"></div>
+        <div class="spinner" id="spinner" aria-labelledby="loading"></div>
         <div class="animate-success-message" id="registered">
           <h2>Yaaaaaaaaaay!</h2>
           <p></p>
@@ -30,119 +30,133 @@
 
       <!-- Header -->
       <div id="form-header" class="header">
-        <h2>Welcome to our Site!</h2>
-        <div class="radio-container">
-          <input
-            class="checkbox-tools"
-            type="radio"
-            name="tools"
-            id="tab-sign-up"
-            checked
-          />
-          <label for="tab-sign-up"> Sign Up </label>
-          <input
-            class="checkbox-tools"
-            type="radio"
-            name="tools"
-            id="tab-sign-in"
-          />
-          <label for="tab-sign-in"> Sign In </label>
-        </div>
+        <h2 aria-labelledby="welcome to our site">Welcome to our Site!</h2>
+        <fieldset class="fieldset-no-style">
+          <div class="radio-container">
+            <input
+              class="checkbox-tools"
+              type="radio"
+              name="tools"
+              id="tab-sign-up"
+              aria-labelledby="sign up"
+              checked
+            />
+            <label for="tab-sign-up"> Sign Up </label>
+            <input
+              class="checkbox-tools"
+              type="radio"
+              name="tools"
+              id="tab-sign-in"
+              aria-labelledby="sign in"
+            />
+            <label for="tab-sign-in"> Sign In </label>
+          </div>
+        </fieldset>
       </div>
-      <form id="form" class="form">
-        <div id="name-container">
-          <!-- First Name -->
-          <div id="first-name-container" class="form-group">
-            <label for="first-name">First Name</label>
-            <input
-              id="first-name"
-              type="text"
-              name="First Name"
-              placeholder="eg. Mike"
-            />
-            <i class="fas fa-check-circle"></i>
-            <i class="fas fa-exclamation-circle"></i>
-            <small>Error Message</small>
+
+      <fieldset class="fieldset-no-style">
+        <form id="form" class="form">
+          <div id="name-container">
+            <!-- First Name -->
+            <div id="first-name-container" class="form-group">
+              <label for="first-name">First Name</label>
+              <input
+                id="first-name"
+                type="text"
+                name="First Name"
+                placeholder="eg. Mike"
+                aria-labelledby="first name"
+              />
+              <i class="fas fa-check-circle" aria-labelledby="success"></i>
+              <i class="fas fa-exclamation-circle" aria-labelledby="error"></i>
+              <small aria-labelledby="error message">Error Message</small>
+            </div>
+
+            <!-- Last Name -->
+            <div id="last-name-container" class="form-group">
+              <label for="last-name">Last Name</label>
+              <input
+                id="last-name"
+                type="text"
+                name="Last Name"
+                placeholder="eg. Jackson"
+                aria-labelledby="last name"
+              />
+              <i class="fas fa-check-circle" aria-labelledby="success"></i>
+              <i class="fas fa-exclamation-circle" aria-labelledby="error"></i>
+              <small aria-labelledby="error message">Error Message</small>
+            </div>
           </div>
 
-          <!-- Last Name -->
-          <div id="last-name-container" class="form-group">
-            <label for="last-name">Last Name</label>
+          <!-- Username -->
+          <div id="username-container" class="form-group">
+            <label for="username">Username</label>
             <input
-              id="last-name"
+              id="username"
               type="text"
-              name="Last Name"
-              placeholder="eg. Jackson"
+              name="Username"
+              placeholder="eg. Mike234"
+              aria-labelledby="username"
             />
-            <i class="fas fa-check-circle"></i>
-            <i class="fas fa-exclamation-circle"></i>
-            <small>Error Message</small>
+            <i class="fas fa-check-circle" aria-labelledby="success"></i>
+            <i class="fas fa-exclamation-circle" aria-labelledby="error"></i>
+            <small aria-labelledby="error message">Error Message</small>
           </div>
-        </div>
 
-        <!-- Username -->
-        <div id="username-container" class="form-group">
-          <label for="username">Username</label>
+          <!-- Email -->
+          <div id="email-container" class="form-group">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              name="Email"
+              placeholder="eg. mike.jackson234@example.com"
+              aria-labelledby="email"
+            />
+            <i class="fas fa-check-circle" aria-labelledby="success"></i>
+            <i class="fas fa-exclamation-circle" aria-labelledby="error"></i>
+            <small aria-labelledby="error message">Error Message</small>
+          </div>
+
+          <!-- Password -->
+          <div id="password-container" class="form-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              name="Password"
+              placeholder="password"
+              aria-labelledby="password"
+            />
+            <i class="fas fa-check-circle" aria-labelledby="success"></i>
+            <i class="fas fa-exclamation-circle" aria-labelledby="error"></i>
+            <small aria-labelledby="error message">Error Message</small>
+          </div>
+
+          <!-- Confirm Password -->
+          <div id="confirm-password-container" class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input
+              id="confirm-password"
+              type="password"
+              name="Confirm Password"
+              placeholder="password"
+              aria-labelledby="confirm password"
+            />
+            <i class="fas fa-check-circle" aria-labelledby="success"></i>
+            <i class="fas fa-exclamation-circle" aria-labelledby="error"></i>
+            <small aria-labelledby="error message">Error Message</small>
+          </div>
+
           <input
-            id="username"
-            type="text"
-            name="Username"
-            placeholder="eg. Mike234"
+            id="submit-btn"
+            type="submit"
+            value="submit"
+            disabled="disabled"
+            aria-labelledby="submit"
           />
-          <i class="fas fa-check-circle"></i>
-          <i class="fas fa-exclamation-circle"></i>
-          <small>Error Message</small>
-        </div>
-
-        <!-- Email -->
-        <div id="email-container" class="form-group">
-          <label for="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="Email"
-            placeholder="eg. mike.jackson234@example.com"
-          />
-          <i class="fas fa-check-circle"></i>
-          <i class="fas fa-exclamation-circle"></i>
-          <small>Error Message</small>
-        </div>
-
-        <!-- Password -->
-        <div id="password-container" class="form-group">
-          <label for="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="Password"
-            placeholder="password"
-          />
-          <i class="fas fa-check-circle"></i>
-          <i class="fas fa-exclamation-circle"></i>
-          <small>Error Message</small>
-        </div>
-
-        <!-- Password -->
-        <div id="confirm-password-container" class="form-group">
-          <label for="confirm-password">Confirm Password</label>
-          <input
-            id="confirm-password"
-            type="password"
-            name="Confirm Password"
-            placeholder="password"
-          />
-          <i class="fas fa-check-circle"></i>
-          <i class="fas fa-exclamation-circle"></i>
-          <small>Error Message</small>
-        </div>
-
-        <input
-          id="submit-btn"
-          type="submit"
-          value="submit"
-          disabled="disabled"
-        />
-      </form>
+        </form>
+      </fieldset>
     </div>
     <script type="module" src="script.js"></script>
   </body>
