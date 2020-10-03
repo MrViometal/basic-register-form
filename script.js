@@ -16,7 +16,7 @@ let formIsValid = {
   firstName: false,
   lastName: false,
   username: false,
-  email: true,
+  email: false,
   password: true,
   confirmPassword: true,
 };
@@ -76,12 +76,19 @@ function checkEmail() {
   const value = email.value.trim();
 
   //email field is empty => error
-  if (value === '') setError(email, 'Email can not be empty');
+  if (value === '') {
+    setError(email, 'Email can not be empty');
+    formIsValid.email = false;
+  }
   //email is not valid => error
-  else if (!isEmail(email)) setError(email, 'Email is not valid');
+  else if (!isEmail(email)) {
+    setError(email, 'Email not valid');
+    formIsValid.email = false;
+  }
   //email is not empty and is valid => success
   else {
     setSuccess(email);
+    formIsValid.email = true;
     return true;
   }
 }
