@@ -18,9 +18,7 @@ lastName.addEventListener('focusout', () => ErrorIfEmpty(lastName));
 username.addEventListener('focusout', () => ErrorIfEmpty(username));
 email.addEventListener('focusout', checkEmail);
 password.addEventListener('focusout', checkPassword);
-confirmPassword.addEventListener('focusout', () =>
-  ErrorIfEmpty(confirmPassword),
-);
+confirmPassword.addEventListener('focusout', checkConfirmPassword);
 
 function isNumber(char) {
   return !isNaN(char - parseInt(char));
@@ -96,6 +94,25 @@ function checkPassword() {
     return true;
   }
 }
+
+function checkConfirmPassword() {
+  const passwordValue = password.value.trim();
+  const confirmPasswordValue = confirmPassword.value.trim();
+  //confirm password is empty => error
+  if (confirmPasswordValue === '') {
+    setError(confirmPassword, `Password confirmation can not be empty`);
+  }
+  //confirm password != password => error
+  else if (passwordValue !== confirmPasswordValue) {
+    setError(confirmPassword, `Password confirmation and password don't match`);
+  }
+  //confirm password is not empty, and matches password => success
+  else {
+    setSuccess(confirmPassword);
+    return true;
+  }
+}
+
 function isEmail(email) {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email,
