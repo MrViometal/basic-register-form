@@ -59,12 +59,12 @@ const signInTab = document.getElementById('tab-sign-in');
 
 //event listeners
 
-firstName.addEventListener('focusout', checkFirstName);
-lastName.addEventListener('focusout', checkLastName);
-username.addEventListener('focusout', checkUsername);
-email.addEventListener('focusout', checkEmail);
-password.addEventListener('focusout', checkPassword);
-confirmPassword.addEventListener('focusout', checkConfirmPassword);
+// firstName.addEventListener('focusout', checkFirstName);
+// lastName.addEventListener('focusout', checkLastName);
+// username.addEventListener('focusout', checkUsername);
+// email.addEventListener('focusout', checkEmail);
+// password.addEventListener('focusout', checkPassword);
+// confirmPassword.addEventListener('focusout', checkConfirmPassword);
 
 //to handle input change
 form.addEventListener('keyup', () => (submit.disabled = !isFormValid()));
@@ -84,6 +84,14 @@ signInTab.addEventListener('click', () => {
   console.log(`sign in, url: ${URL}`);
 });
 
+window.onload = function (event) {
+  firstName.onkeyup = checkFirstName;
+  lastName.onkeyup = checkLastName;
+  username.onkeyup = checkUsername;
+  email.onkeyup = checkEmail;
+  password.onkeyup = checkPassword;
+  confirmPassword.onkeyup = checkConfirmPassword;
+};
 // **********************************************************************
 
 //functions
@@ -211,7 +219,7 @@ function isFormValid() {
     if (formIsValid.email && formIsValid.password) {
       return true;
     } else return false;
-  } else {
+  } else if (mode === 'sign-up') {
     if (
       formIsValid.firstName &&
       formIsValid.lastName &&
@@ -222,5 +230,5 @@ function isFormValid() {
     ) {
       return true;
     } else return false;
-  }
+  } else alert('you broke something, check sign-up/in conditions');
 }
