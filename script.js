@@ -126,14 +126,14 @@ function checkEmail() {
 }
 
 function checkPassword() {
-  const passwordValue = password.value.trim();
   const passwordPattern = /^[A-Za-z]\w{7,19}$/;
 
   //password is empty => error
-  if (passwordValue === '') {
+  if (password.value === '') {
     setError(password, 'Password can not be empty');
     formIsValid.password = false;
   }
+
   //password doesn't match pattern => error
   else if (!password.value.match(passwordPattern)) {
     //first character != letter => error
@@ -142,16 +142,18 @@ function checkPassword() {
       formIsValid.password = false;
     }
     //password is less than 8 chars or more than 20 chars
-    else if (password.value.length < 8 || password.value.length > 20) {
+    else if (!(password.value.length > 8 && password.value.length < 20)) {
       setError(password, `password must be between 8 and 20 characters long`);
       formIsValid.password = false;
     }
+
     //password has special characters => error
     else {
       setError(
         password,
         `password can only contain letters, numbers, and underscores`,
       );
+
       formIsValid.password = false;
     }
   }
@@ -169,15 +171,13 @@ function checkPassword() {
 }
 
 function checkConfirmPassword() {
-  const passwordValue = password.value.trim();
-  const confirmPasswordValue = confirmPassword.value.trim();
   //confirm password is empty => error
-  if (confirmPasswordValue === '') {
+  if (confirmPassword.value === '') {
     setError(confirmPassword, `Password confirmation can not be empty`);
     formIsValid.confirmPassword = false;
   }
   //confirm password != password => error
-  else if (passwordValue !== confirmPasswordValue) {
+  else if (password.value != confirmPassword.value) {
     setError(confirmPassword, `Password confirmation and password don't match`);
     formIsValid.confirmPassword = false;
   }
@@ -185,10 +185,10 @@ function checkConfirmPassword() {
   else {
     setSuccess(confirmPassword);
     formIsValid.confirmPassword = true;
-
     return true;
   }
 }
+
 function checkWhichTab(e) {
   if (e.target.id === 'tab-sign-in') {
     mode = 'sign-in';
