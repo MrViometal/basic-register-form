@@ -159,8 +159,12 @@ function checkPassword() {
   else {
     setSuccess(password);
     formIsValid.password = true;
-
     return true;
+  }
+
+  //password was changed after confirm password was filled
+  if (confirmPassword.value.length !== 0) {
+    checkConfirmPassword();
   }
 }
 
