@@ -59,30 +59,12 @@ const signInTab = document.getElementById('tab-sign-in');
 
 //event listeners
 
-// firstName.addEventListener('focusout', checkFirstName);
-// lastName.addEventListener('focusout', checkLastName);
-// username.addEventListener('focusout', checkUsername);
-// email.addEventListener('focusout', checkEmail);
-// password.addEventListener('focusout', checkPassword);
-// confirmPassword.addEventListener('focusout', checkConfirmPassword);
-
 //to handle input change
 form.addEventListener('keyup', () => (submit.disabled = !isFormValid()));
 
 //to handle click on the page
 body.addEventListener('click', () => (submit.disabled = !isFormValid()));
 
-signUpTab.addEventListener('click', () => {
-  URL = API_URL + API_PATH_SIGNUP;
-  showSignUpFields();
-  console.log(`sign up, url: ${URL}`);
-});
-
-signInTab.addEventListener('click', () => {
-  URL = API_URL + API_PATH_SIGNIN;
-  showSignInFields();
-  console.log(`sign in, url: ${URL}`);
-});
 
 window.onload = function (event) {
   firstName.onkeyup = checkFirstName;
@@ -91,6 +73,8 @@ window.onload = function (event) {
   email.onkeyup = checkEmail;
   password.onkeyup = checkPassword;
   confirmPassword.onkeyup = checkConfirmPassword;
+  signInTab.onclick = checkWhichTab;
+  signUpTab.onclick = checkWhichTab;
 };
 // **********************************************************************
 
@@ -196,9 +180,27 @@ function checkConfirmPassword() {
     return true;
   }
 }
+function checkWhichTab(e) {
+  if (e.target.id === 'tab-sign-in') {
+    mode = 'sign-in';
+
+    URL = API_URL + API_PATH_SIGNIN;
+    console.log({ URL });
+
+    showSignInFields();
+  } else if (e.target.id === 'tab-sign-up') {
+    mode = 'sign-up';
+
+    URL = API_URL + API_PATH_SIGNUP;
+    console.log({ URL });
+
+    showSignUpFields();
+  } else {
+    alert(`check radio buttons' id's you broke something`);
+  }
+}
 
 function showSignUpFields() {
-  mode = 'sign-up';
   fnContainer.style.display = 'block';
   lnContainer.style.display = 'block';
   unContainer.style.display = 'block';
@@ -206,7 +208,6 @@ function showSignUpFields() {
 }
 
 function showSignInFields() {
-  mode = 'sign-in';
   fnContainer.style.display = 'none';
   lnContainer.style.display = 'none';
   unContainer.style.display = 'none';
