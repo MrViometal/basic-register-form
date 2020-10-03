@@ -29,6 +29,7 @@ let formIsValid = {
 
 // general elements
 const body = document.getElementsByTagName('BODY')[0];
+const title = document.getElementsByTagName('TITLE')[0];
 const { fnContainer, lnContainer, unContainer, cpContainer } = {
   fnContainer: document.getElementById('first-name-container'),
   lnContainer: document.getElementById('last-name-container'),
@@ -205,6 +206,8 @@ function checkWhichTab(e) {
 }
 
 function showSignUpFields() {
+  title.innerHTML = 'Sign Up | Robusta';
+
   fnContainer.style.display = 'block';
   lnContainer.style.display = 'block';
   unContainer.style.display = 'block';
@@ -212,6 +215,8 @@ function showSignUpFields() {
 }
 
 function showSignInFields() {
+  title.innerHTML = 'Sign In | Robusta';
+
   fnContainer.style.display = 'none';
   lnContainer.style.display = 'none';
   unContainer.style.display = 'none';
