@@ -29,14 +29,12 @@ let formIsValid = {
 
 // general elements
 const body = document.getElementsByTagName('BODY')[0];
-const containers = {
+const { fnContainer, lnContainer, unContainer, cpContainer } = {
   fnContainer: document.getElementById('first-name-container'),
   lnContainer: document.getElementById('last-name-container'),
   unContainer: document.getElementById('username-container'),
-
   cpContainer: document.getElementById('confirm-password-container'),
 };
-const { fnContainer, lnContainer, unContainer, cpContainer } = containers;
 
 //form elements
 const form = document.getElementById('form');
@@ -64,7 +62,39 @@ form.addEventListener('keyup', () => (submit.disabled = !isFormValid()));
 
 //to handle click on the page
 body.addEventListener('click', () => (submit.disabled = !isFormValid()));
+submit.addEventListener('click', e => {
+  e.preventDefault();
+  const ajax = new XMLHttpRequest();
+  const method = 'POST';
+  const asynchronous = true;
 
+  const signUpData = {
+    name: `${firstName.value} ${lastName.value}`,
+    email: email.value,
+    username: username.value,
+    password: password.value,
+  };
+
+  const signInData = {
+    email: email.value,
+    password: password.value,
+  };
+
+  // mode === 'sign-up' && console.log(JSON.stringify(signUpData));
+  // mode === 'sign-in' && console.log(JSON.stringify(signInData));
+
+  ajax.open(method, URL, asynchronous);
+
+  ajax.setRequestHeader('Content-type', 'application/json');
+
+  mode === 'sign-up' && ajax.send(JSON.stringify(signUpData));
+
+  mode === 'sign-in' && ajax.send(JSON.stringify(signInData));
+
+  ajax.onload = () => {
+    console.log(ajax.response);
+  };
+});
 
 window.onload = function (event) {
   firstName.onkeyup = checkFirstName;
@@ -86,12 +116,14 @@ function checkFirstName() {
   if (ErrorIfEmpty(firstName)) formIsValid.firstName = true;
   else formIsValid.firstName = false;
 }
+
 function checkLastName() {
   ErrorIfEmpty(lastName);
 
   if (ErrorIfEmpty(lastName)) formIsValid.lastName = true;
   else formIsValid.lastName = false;
 }
+
 function checkUsername() {
   ErrorIfEmpty(username);
 
