@@ -1,6 +1,3 @@
-var API_URL = 'https://private-b2e6827-robustatask.apiary-mock.com';
-var API_PATH_SIGNUP = '/auth/register';
-var API_PATH_SIGNIN = '/auth/login';
 import {
   isNumber,
   isEmail,
@@ -8,6 +5,23 @@ import {
   setSuccess,
   ErrorIfEmpty,
 } from './helperFunctions.js';
+// *********************************************************************
+
+var API_URL = 'https://private-b2e6827-robustatask.apiary-mock.com';
+var API_PATH_SIGNUP = '/auth/register';
+var API_PATH_SIGNIN = '/auth/login';
+// ---------------------------------------------------------------------
+
+let formIsValid = {
+  firstName: false,
+  lastName: false,
+  username: false,
+  email: true,
+  password: true,
+  confirmPassword: true,
+};
+
+// *********************************************************************
 
 //get elements
 const form = document.getElementById('form');
@@ -20,12 +34,43 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirm-password');
 
-firstName.addEventListener('focusout', () => ErrorIfEmpty(firstName));
-lastName.addEventListener('focusout', () => ErrorIfEmpty(lastName));
-username.addEventListener('focusout', () => ErrorIfEmpty(username));
+const submit = document.getElementById('submit-btn');
+
+// *********************************************************************
+
+//event listeners
+
+firstName.addEventListener('focusout', checkFirstName);
+lastName.addEventListener('focusout', checkLastName);
+username.addEventListener('focusout', checkUsername);
 email.addEventListener('focusout', checkEmail);
 password.addEventListener('focusout', checkPassword);
 confirmPassword.addEventListener('focusout', checkConfirmPassword);
+//to handle input change
+form.addEventListener('keyup', () => (submit.disabled = !isFormValid()));
+
+// **********************************************************************
+
+//functions
+
+function checkFirstName() {
+  ErrorIfEmpty(firstName);
+
+  if (ErrorIfEmpty(firstName)) formIsValid.firstName = true;
+  else formIsValid.firstName = false;
+}
+function checkLastName() {
+  ErrorIfEmpty(lastName);
+
+  if (ErrorIfEmpty(lastName)) formIsValid.lastName = true;
+  else formIsValid.lastName = false;
+}
+function checkUsername() {
+  ErrorIfEmpty(username);
+
+  if (ErrorIfEmpty(username)) formIsValid.username = true;
+  else formIsValid.username = false;
+}
 
 function checkEmail() {
   const value = email.value.trim();
@@ -89,5 +134,20 @@ function checkConfirmPassword() {
   else {
     setSuccess(confirmPassword);
     return true;
+  }
+}
+
+function isFormValid() {
+  if (
+    formIsValid.firstName &&
+    formIsValid.lastName &&
+    formIsValid.username &&
+    formIsValid.email &&
+    formIsValid.password &&
+    formIsValid.confirmPassword
+  ) {
+    return true;
+  } else {
+    return false;
   }
 }
