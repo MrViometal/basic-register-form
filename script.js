@@ -53,6 +53,11 @@ const submit = document.getElementById('submit-btn');
 const signUpTab = document.getElementById('tab-sign-up');
 const signInTab = document.getElementById('tab-sign-in');
 
+// loader elements
+const loader = document.getElementById('loader');
+const spinner = document.getElementById('spinner');
+const registered = document.getElementById('registered');
+
 // *********************************************************************
 
 //event listeners
@@ -63,6 +68,8 @@ form.addEventListener('keyup', () => (submit.disabled = !isFormValid()));
 //to handle click on the page
 body.addEventListener('click', () => (submit.disabled = !isFormValid()));
 submit.addEventListener('click', e => {
+  loader.style.display = 'flex';
+
   e.preventDefault();
   const ajax = new XMLHttpRequest();
   const method = 'POST';
@@ -93,6 +100,12 @@ submit.addEventListener('click', e => {
 
   ajax.onload = () => {
     console.log(ajax.response);
+  };
+
+  ajax.onreadystatechange = e => {
+    if (e.currentTarget.status === 200) {
+      responseSuccessful();
+    } else console.log('fail');
   };
 });
 
@@ -264,4 +277,15 @@ function isFormValid() {
       return true;
     } else return false;
   } else alert('you broke something, check sign-up/in conditions');
+}
+
+function responseSuccessful() {
+  spinner.style.display = 'none';
+  registered.style.display = 'block';
+  registered.children[1].innerHTML =
+    mode === 'sign-up'
+      ? 'You have signed up successfully, Welcome!'
+      : mode === 'sign-in'
+      ? 'Welcome back, you are now logged in'
+      : 'you have broke something check your sign-up/in conditions';
 }
