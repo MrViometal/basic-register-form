@@ -2,6 +2,26 @@ export function isNumber(char) {
   return !isNaN(char - parseInt(char));
 }
 
+export function isEmail(email) {
+  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    email.value,
+  );
+}
+
+export function setError(field, message) {
+  const formGroup = field.parentElement;
+  const small = formGroup.querySelector('small');
+
+  small.innerText = message;
+
+  formGroup.className = 'form-group error';
+}
+
+export function setSuccess(field) {
+  const formGroup = field.parentElement;
+  formGroup.className = 'form-group success';
+}
+
 export function ErrorIfEmpty(element) {
   const elementValue = element.value.trim();
   if (elementValue === '') {
@@ -11,24 +31,4 @@ export function ErrorIfEmpty(element) {
     setSuccess(element);
     return true;
   }
-}
-
-export function setError(field, message) {
-  const formGroup = field.parentElement; // .form-group
-  const small = formGroup.querySelector('small');
-
-  small.innerText = message;
-
-  formGroup.className = 'form-group error';
-}
-
-export function setSuccess(field) {
-  const formGroup = field.parentElement; // .form-group
-  formGroup.className = 'form-group success';
-}
-
-export function isEmail(email) {
-  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-    email,
-  );
 }

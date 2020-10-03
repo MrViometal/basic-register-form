@@ -1,7 +1,13 @@
 var API_URL = 'https://private-b2e6827-robustatask.apiary-mock.com';
 var API_PATH_SIGNUP = '/auth/register';
 var API_PATH_SIGNIN = '/auth/login';
-import {isNumber, ErrorIfEmpty, setError, setSuccess, isEmail} from './helperFunctions.js'
+import {
+  isNumber,
+  isEmail,
+  setError,
+  setSuccess,
+  ErrorIfEmpty,
+} from './helperFunctions.js';
 
 //get elements
 const form = document.getElementById('form');
@@ -21,15 +27,13 @@ email.addEventListener('focusout', checkEmail);
 password.addEventListener('focusout', checkPassword);
 confirmPassword.addEventListener('focusout', checkConfirmPassword);
 
-
-
 function checkEmail() {
   const value = email.value.trim();
 
   //email field is empty => error
   if (value === '') setError(email, 'Email can not be empty');
   //email is not valid => error
-  else if (!isEmail(email.value)) setError(email, 'Email is not valid');
+  else if (!isEmail(email)) setError(email, 'Email is not valid');
   //email is not empty and is valid => success
   else {
     setSuccess(email);
@@ -87,4 +91,3 @@ function checkConfirmPassword() {
     return true;
   }
 }
-
