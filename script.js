@@ -16,6 +16,7 @@ const confirmPassword = document.getElementById('confirm-password');
 firstName.addEventListener('focusout', () => ErrorIfEmpty(firstName));
 lastName.addEventListener('focusout', () => ErrorIfEmpty(lastName));
 username.addEventListener('focusout', () => ErrorIfEmpty(username));
+email.addEventListener('focusout', checkEmail);
 email.addEventListener('focusout', () => ErrorIfEmpty(email));
 password.addEventListener('focusout', () => ErrorIfEmpty(password));
 confirmPassword.addEventListener('focusout', () =>
@@ -45,4 +46,23 @@ function setError(field, message) {
 function setSuccess(field) {
   const formGroup = field.parentElement; // .form-group
   formGroup.className = 'form-group success';
+}
+function checkEmail() {
+  const value = email.value.trim();
+
+  //email field is empty => error
+  if (value === '') setError(email, 'Email can not be empty');
+  //email is not valid => error
+  else if (!isEmail(email.value)) setError(email, 'Email is not valid');
+  //email is not empty and is valid => success
+  else {
+    setSuccess(email);
+    return true;
+  }
+}
+
+function isEmail(email) {
+  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+    email,
+  );
 }
