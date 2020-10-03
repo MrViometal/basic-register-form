@@ -71,7 +71,7 @@ body {
 
 .form-group {
   margin-bottom: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   position: relative;
 }
 
@@ -122,7 +122,10 @@ body {
 }
 
 .form-group.error small {
+  padding-top: 10px;
+  display: block;
   visibility: visible;
+  position: relative;
   color: var(--error-color);
 }
 
