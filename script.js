@@ -24,6 +24,7 @@ let formIsValid = {
 // *********************************************************************
 
 //get elements
+const body = document.getElementsByTagName('BODY')[0];
 const form = document.getElementById('form');
 
 const firstName = document.getElementById('first-name');
@@ -49,6 +50,9 @@ confirmPassword.addEventListener('focusout', checkConfirmPassword);
 
 //to handle input change
 form.addEventListener('keyup', () => (submit.disabled = !isFormValid()));
+
+//to handle click on the page
+body.addEventListener('click', () => (submit.disabled = !isFormValid()));
 
 // **********************************************************************
 
@@ -156,6 +160,7 @@ function checkConfirmPassword() {
 }
 
 function isFormValid() {
+  console.log('validating form');
   if (
     formIsValid.firstName &&
     formIsValid.lastName &&
