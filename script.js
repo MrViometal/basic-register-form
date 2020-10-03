@@ -191,14 +191,12 @@ function checkWhichTab(e) {
     mode = 'sign-in';
 
     URL = API_URL + API_PATH_SIGNIN;
-    console.log({ URL });
 
     showSignInFields();
   } else if (e.target.id === 'tab-sign-up') {
     mode = 'sign-up';
 
     URL = API_URL + API_PATH_SIGNUP;
-    console.log({ URL });
 
     showSignUpFields();
   } else {
@@ -221,7 +219,6 @@ function showSignInFields() {
 }
 
 function isFormValid() {
-  console.log('change');
   if (mode === 'sign-in') {
     if (formIsValid.email && formIsValid.password) {
       return true;
@@ -279,13 +276,9 @@ function onSubmit(e) {
 
   mode === 'sign-in' && ajax.send(JSON.stringify(signInData));
 
-  ajax.onload = () => {
-    console.log(ajax.response);
-  };
-
   ajax.onreadystatechange = e => {
     if (e.currentTarget.status === 200) {
       responseSuccessful();
-    } else console.log('fail');
+    } else alert('request failed');
   };
 }
