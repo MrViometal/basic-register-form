@@ -12,6 +12,7 @@ var API_PATH_SIGNUP = '/auth/register';
 var API_PATH_SIGNIN = '/auth/login';
 // ---------------------------------------------------------------------
 let URL = API_URL + API_PATH_SIGNUP;
+var mode = 'sign-up';
 
 let formIsValid = {
   firstName: false,
@@ -189,6 +190,7 @@ function checkConfirmPassword() {
 }
 
 function showSignUpFields() {
+  mode = 'sign-up';
   fnContainer.style.display = 'block';
   lnContainer.style.display = 'block';
   unContainer.style.display = 'block';
@@ -196,6 +198,7 @@ function showSignUpFields() {
 }
 
 function showSignInFields() {
+  mode = 'sign-in';
   fnContainer.style.display = 'none';
   lnContainer.style.display = 'none';
   unContainer.style.display = 'none';
@@ -203,17 +206,21 @@ function showSignInFields() {
 }
 
 function isFormValid() {
-  console.log('validating form');
-  if (
-    formIsValid.firstName &&
-    formIsValid.lastName &&
-    formIsValid.username &&
-    formIsValid.email &&
-    formIsValid.password &&
-    formIsValid.confirmPassword
-  ) {
-    return true;
+  console.log('change');
+  if (mode === 'sign-in') {
+    if (formIsValid.email && formIsValid.password) {
+      return true;
+    } else return false;
   } else {
-    return false;
+    if (
+      formIsValid.firstName &&
+      formIsValid.lastName &&
+      formIsValid.username &&
+      formIsValid.email &&
+      formIsValid.password &&
+      formIsValid.confirmPassword
+    ) {
+      return true;
+    } else return false;
   }
 }
