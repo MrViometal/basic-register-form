@@ -11,6 +11,7 @@ var API_URL = 'https://private-b2e6827-robustatask.apiary-mock.com';
 var API_PATH_SIGNUP = '/auth/register';
 var API_PATH_SIGNIN = '/auth/login';
 // ---------------------------------------------------------------------
+let URL = API_URL + API_PATH_SIGNUP;
 
 let formIsValid = {
   firstName: false,
@@ -24,7 +25,19 @@ let formIsValid = {
 // *********************************************************************
 
 //get elements
+
+// general elements
 const body = document.getElementsByTagName('BODY')[0];
+const containers = {
+  fnContainer: document.getElementById('first-name-container'),
+  lnContainer: document.getElementById('last-name-container'),
+  unContainer: document.getElementById('username-container'),
+
+  cpContainer: document.getElementById('confirm-password-container'),
+};
+const { fnContainer, lnContainer, unContainer, cpContainer } = containers;
+
+//form elements
 const form = document.getElementById('form');
 
 const firstName = document.getElementById('first-name');
@@ -36,6 +49,10 @@ const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirm-password');
 
 const submit = document.getElementById('submit-btn');
+
+// header elements
+const signUpTab = document.getElementById('tab-sign-up');
+const signInTab = document.getElementById('tab-sign-in');
 
 // *********************************************************************
 
@@ -53,6 +70,18 @@ form.addEventListener('keyup', () => (submit.disabled = !isFormValid()));
 
 //to handle click on the page
 body.addEventListener('click', () => (submit.disabled = !isFormValid()));
+
+signUpTab.addEventListener('click', () => {
+  URL = API_URL + API_PATH_SIGNUP;
+  showSignUpFields();
+  console.log(`sign up, url: ${URL}`);
+});
+
+signInTab.addEventListener('click', () => {
+  URL = API_URL + API_PATH_SIGNIN;
+  showSignInFields();
+  console.log(`sign in, url: ${URL}`);
+});
 
 // **********************************************************************
 
@@ -157,6 +186,20 @@ function checkConfirmPassword() {
 
     return true;
   }
+}
+
+function showSignUpFields() {
+  fnContainer.style.display = 'block';
+  lnContainer.style.display = 'block';
+  unContainer.style.display = 'block';
+  cpContainer.style.display = 'block';
+}
+
+function showSignInFields() {
+  fnContainer.style.display = 'none';
+  lnContainer.style.display = 'none';
+  unContainer.style.display = 'none';
+  cpContainer.style.display = 'none';
 }
 
 function isFormValid() {
