@@ -17,11 +17,14 @@ firstName.addEventListener('focusout', () => ErrorIfEmpty(firstName));
 lastName.addEventListener('focusout', () => ErrorIfEmpty(lastName));
 username.addEventListener('focusout', () => ErrorIfEmpty(username));
 email.addEventListener('focusout', checkEmail);
-email.addEventListener('focusout', () => ErrorIfEmpty(email));
-password.addEventListener('focusout', () => ErrorIfEmpty(password));
+password.addEventListener('focusout', checkPassword);
 confirmPassword.addEventListener('focusout', () =>
   ErrorIfEmpty(confirmPassword),
 );
+
+function isNumber(char) {
+  return !isNaN(char - parseInt(char));
+}
 
 function ErrorIfEmpty(element) {
   const elementValue = element.value.trim();
@@ -61,6 +64,38 @@ function checkEmail() {
   }
 }
 
+function checkPassword() {
+  const passwordValue = password.value.trim();
+  const passwordPattern = /^[A-Za-z]\w{7,19}$/;
+
+  //password is empty => error
+  if (passwordValue === '') {
+    setError(password, 'Password can not be empty');
+  }
+  //password doesn't match pattern => error
+  else if (!password.value.match(passwordPattern)) {
+    //first character != letter => error
+    if (isNumber(password.value.charAt(0))) {
+      setError(password, `first character must be a letter`);
+    }
+    //password is less than 8 chars or more than 20 chars
+    else if (password.value.length < 8 || password.value.length > 20) {
+      setError(password, `password must be between 8 and 20 characters long`);
+    }
+    //password has special characters => error
+    else {
+      setError(
+        password,
+        `password can only contain letters, numbers, and underscores`,
+      );
+    }
+  }
+  //password is not empty, matches pattern, between 8 and 20 chars, and has no special chars => success
+  else {
+    setSuccess(password);
+    return true;
+  }
+}
 function isEmail(email) {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email,
