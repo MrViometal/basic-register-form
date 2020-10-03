@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  --success-color: #2ecc71;
+  --error-color: #e74c3c;
 }
 
 body {
@@ -69,4 +71,40 @@ body {
   font-size: 14px;
   padding: 10px;
   width: 100%;
+}
+
+.form-group.success input {
+  border-color: var(--success-color);
+}
+
+.form-group.error input {
+  border-color: var(--error-color);
+}
+
+.form-group i {
+  visibility: hidden;
+  position: absolute;
+  top: 45px;
+  right: 25px;
+}
+
+.form-group.success i.fa-check-circle {
+  visibility: visible;
+  color: var(--success-color);
+}
+.form-group.error i.fa-exclamation-circle {
+  visibility: visible;
+  color: var(--error-color);
+}
+
+.form-group small {
+  visibility: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.form-group.error small {
+  visibility: visible;
+  color: var(--error-color);
 }
