@@ -17,7 +17,7 @@ let formIsValid = {
   lastName: false,
   username: false,
   email: false,
-  password: true,
+  password: false,
   confirmPassword: true,
 };
 
@@ -100,16 +100,19 @@ function checkPassword() {
   //password is empty => error
   if (passwordValue === '') {
     setError(password, 'Password can not be empty');
+    formIsValid.password = false;
   }
   //password doesn't match pattern => error
   else if (!password.value.match(passwordPattern)) {
     //first character != letter => error
     if (isNumber(password.value.charAt(0))) {
       setError(password, `first character must be a letter`);
+      formIsValid.password = false;
     }
     //password is less than 8 chars or more than 20 chars
     else if (password.value.length < 8 || password.value.length > 20) {
       setError(password, `password must be between 8 and 20 characters long`);
+      formIsValid.password = false;
     }
     //password has special characters => error
     else {
@@ -117,11 +120,14 @@ function checkPassword() {
         password,
         `password can only contain letters, numbers, and underscores`,
       );
+      formIsValid.password = false;
     }
   }
   //password is not empty, matches pattern, between 8 and 20 chars, and has no special chars => success
   else {
     setSuccess(password);
+    formIsValid.password = true;
+
     return true;
   }
 }
