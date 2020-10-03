@@ -18,6 +18,21 @@ body {
   margin: 0;
 }
 
+#name-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+#first-name-container {
+  position: relative;
+  width: 48%;
+}
+#last-name-container {
+  position: relative;
+  width: 48%;
+}
+
 .container {
   position: relative;
   background-color: #181a1b;

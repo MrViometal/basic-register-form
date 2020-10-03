@@ -185,7 +185,6 @@ function checkConfirmPassword() {
     return true;
   }
 }
-
 function checkWhichTab(e) {
   if (e.target.id === 'tab-sign-in') {
     mode = 'sign-in';
