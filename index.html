@@ -1,33 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign up | Robusta</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Robusta</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="main-container" class="container">
+      <div id="form-header" class="header">
+        <h2>Welcome to our Site!</h2>
+      </div>
+      <form id="form" class="form">
+        <!-- First Name -->
+        <div id="first-name-container" class="form-group">
+          <label for="first-name">First Name</label>
+          <input
+            id="first-name"
+            type="text"
+            name="First Name"
+            placeholder="eg. Mike"
+          />
+        </div>
 
-    <form action="https://private-b2e6827-robustatask.apiary-mock.com/auth/register" method="post">
-      <div class="form-group">
-        <span>Full Name</span>
-        <input type="text" id="username" />
-      </div>
-      <div class="form-group">
-        <span>Email</span>
-        <input type="text" id="username" />
-      </div>
-      <div class="form-group">
-        <span>Username</span>
-        <input type="text" id="username" />
-      </div>
-      <div class="form-group">
-        <span>Password</span>
-        <input type="password" id="password" />
-      </div>
-      <input type="submit" value="submit" />
-    </form>
+        <!-- Last Name -->
+        <div id="last-name-container" class="form-group">
+          <label for="last-name">Last Name</label>
+          <input
+            id="last-name"
+            type="text"
+            name="Last Name"
+            placeholder="eg. Jackson"
+          />
+        </div>
 
-  <script src="script.js"></script>
-</body>
+        <!-- Username -->
+        <div id="username-container" class="form-group">
+          <label for="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            name="Username"
+            placeholder="eg. Mike234"
+          />
+        </div>
+
+        <!-- Email -->
+        <div id="email-container" class="form-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            name="Email"
+            placeholder="eg. mike.jackson234@example.com"
+          />
+        </div>
+
+        <!-- Password -->
+        <div id="password-container" class="form-group">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            name="Password"
+            placeholder="password"
+          />
+        </div>
+
+        <!-- Password -->
+        <div id="confirm-password-container" class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            id="confirm-password"
+            type="password"
+            name="Confirm Password"
+            placeholder="password"
+          />
+        </div>
+
+        <input id="submit-btn" type="submit" value="submit" />
+      </form>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
