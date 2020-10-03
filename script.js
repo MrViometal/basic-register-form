@@ -67,47 +67,6 @@ form.addEventListener('keyup', () => (submit.disabled = !isFormValid()));
 
 //to handle click on the page
 body.addEventListener('click', () => (submit.disabled = !isFormValid()));
-submit.addEventListener('click', e => {
-  loader.style.display = 'flex';
-
-  e.preventDefault();
-  const ajax = new XMLHttpRequest();
-  const method = 'POST';
-  const asynchronous = true;
-
-  const signUpData = {
-    name: `${firstName.value} ${lastName.value}`,
-    email: email.value,
-    username: username.value,
-    password: password.value,
-  };
-
-  const signInData = {
-    email: email.value,
-    password: password.value,
-  };
-
-  // mode === 'sign-up' && console.log(JSON.stringify(signUpData));
-  // mode === 'sign-in' && console.log(JSON.stringify(signInData));
-
-  ajax.open(method, URL, asynchronous);
-
-  ajax.setRequestHeader('Content-type', 'application/json');
-
-  mode === 'sign-up' && ajax.send(JSON.stringify(signUpData));
-
-  mode === 'sign-in' && ajax.send(JSON.stringify(signInData));
-
-  ajax.onload = () => {
-    console.log(ajax.response);
-  };
-
-  ajax.onreadystatechange = e => {
-    if (e.currentTarget.status === 200) {
-      responseSuccessful();
-    } else console.log('fail');
-  };
-});
 
 window.onload = function (event) {
   firstName.onkeyup = checkFirstName;
@@ -118,6 +77,7 @@ window.onload = function (event) {
   confirmPassword.onkeyup = checkConfirmPassword;
   signInTab.onclick = checkWhichTab;
   signUpTab.onclick = checkWhichTab;
+  submit.onclick = onSubmit;
 };
 // **********************************************************************
 
@@ -225,6 +185,7 @@ function checkConfirmPassword() {
     return true;
   }
 }
+
 function checkWhichTab(e) {
   if (e.target.id === 'tab-sign-in') {
     mode = 'sign-in';
@@ -288,4 +249,46 @@ function responseSuccessful() {
       : mode === 'sign-in'
       ? 'Welcome back, you are now logged in'
       : 'you have broke something check your sign-up/in conditions';
+}
+
+function onSubmit(e) {
+  loader.style.display = 'flex';
+
+  e.preventDefault();
+  const ajax = new XMLHttpRequest();
+  const method = 'POST';
+  const asynchronous = true;
+
+  const signUpData = {
+    name: `${firstName.value} ${lastName.value}`,
+    email: email.value,
+    username: username.value,
+    password: password.value,
+  };
+
+  const signInData = {
+    email: email.value,
+    password: password.value,
+  };
+
+  // mode === 'sign-up' && console.log(JSON.stringify(signUpData));
+  // mode === 'sign-in' && console.log(JSON.stringify(signInData));
+
+  ajax.open(method, URL, asynchronous);
+
+  ajax.setRequestHeader('Content-type', 'application/json');
+
+  mode === 'sign-up' && ajax.send(JSON.stringify(signUpData));
+
+  mode === 'sign-in' && ajax.send(JSON.stringify(signInData));
+
+  ajax.onload = () => {
+    console.log(ajax.response);
+  };
+
+  ajax.onreadystatechange = e => {
+    if (e.currentTarget.status === 200) {
+      responseSuccessful();
+    } else console.log('fail');
+  };
 }
