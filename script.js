@@ -121,7 +121,7 @@ function checkEmail() {
   else {
     setSuccess(email);
     formIsValid.email = true;
-    return true;
+    // return true;
   }
 }
 
@@ -161,7 +161,7 @@ function checkPassword() {
   else {
     setSuccess(password);
     formIsValid.password = true;
-    return true;
+    // return true;
   }
 
   //password was changed after confirm password was filled
@@ -185,7 +185,7 @@ function checkConfirmPassword() {
   else {
     setSuccess(confirmPassword);
     formIsValid.confirmPassword = true;
-    return true;
+    // return true;
   }
 }
 
